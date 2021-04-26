@@ -1,0 +1,17 @@
+:root{
+    --colNum: 5;
+    --squareSize: 50px;
+}
+
+#grid-container{
+    display: grid;
+    grid-template-columns: repeat(var(--colNum), var(--squareSize));
+
+  
+}
+
+.square {
+    border: 1px solid black;
+    width: var(--squareSize);
+    height: var(--squareSize);
+}

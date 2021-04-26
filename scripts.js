@@ -10,15 +10,17 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let i = 1; i <= numOfSquares * numOfSquares; i++) {
             let square = document.createElement('div');
             square.classList.add("square");
+            square.addEventListener('mouseover', randomColorSquare)
             gridContainer.appendChild(square);
         }
-        randomColorSquare();
+
     }
 
-    function randomColorSquare(){
-        document.querySelectorAll('.square').forEach(square =>
-            square.addEventListener('mouseover', () => square.style.backgroundColor = 'hotpink')
-        );
+    function randomColorSquare(evnt) {
+        let rgbRed = Math.floor(Math.random() * 256);
+        let rgbGreen = Math.floor(Math.random() * 256);
+        let rgbBlue = Math.floor(Math.random() * 256);
+        evnt.target.style.backgroundColor = `rgb(${rgbRed}, ${rgbGreen}, ${rgbBlue})`;
     }
 
     function getNumberInput() {
@@ -43,9 +45,16 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('#form-submit').addEventListener('click', function (event) {
             event.preventDefault();
             clear();
-            createGrid(getNumberInput());
+            let number = getNumberInput();
+            if (number >= 4 && number <= 100) {
+                createGrid(number);
+            }
+            else {
+                alert('please enter a number between 4-100');
+                createGrid(32);
+            }
         });
-        document.querySelector('#resetSquareColor').addEventListener('click', function (event) {
+        document.querySelector('#clear').addEventListener('click', function (event) {
             event.preventDefault();
             resetSquareColor();
         });
